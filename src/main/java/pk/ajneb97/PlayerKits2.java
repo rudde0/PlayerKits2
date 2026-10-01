@@ -65,9 +65,6 @@ public class PlayerKits2 extends JavaPlugin {
         this.inventoryUpdateTaskManager = new InventoryUpdateTaskManager(this);
         this.inventoryUpdateTaskManager.start();
 
-        this.verifyManager = new VerifyManager(this);
-        this.verifyManager.verify();
-
         if(configsManager.getMainConfigManager().isMySQL()){
             mySQLConnection = new MySQLConnection(this);
             mySQLConnection.setupMySql();
@@ -80,6 +77,9 @@ public class PlayerKits2 extends JavaPlugin {
             new ExpansionPlayerKits(this).register();
         }
         Metrics metrics = new Metrics(this,19795);
+
+        this.verifyManager = new VerifyManager(this);
+        this.verifyManager.verify();
 
         Bukkit.getConsoleSender().sendMessage(MessagesManager.getLegacyColoredMessage(prefix+"&eHas been enabled! &fVersion: "+version));
         Bukkit.getConsoleSender().sendMessage(MessagesManager.getLegacyColoredMessage(prefix+"&eThanks for using my plugin!   &f~Ajneb97"));
@@ -158,11 +158,14 @@ public class PlayerKits2 extends JavaPlugin {
             case "26.2":
                 serverVersion = ServerVersion.v26_2;
                 break;
+            case "26.3":
+                serverVersion = ServerVersion.v26_3;
+                break;
             default:
                 try{
                     serverVersion = ServerVersion.valueOf(packageName.replace("org.bukkit.craftbukkit.", ""));
                 }catch(Exception e){
-                    serverVersion = ServerVersion.v26_2;
+                    serverVersion = ServerVersion.v26_3;
                 }
         }
     }
